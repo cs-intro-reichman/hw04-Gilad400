@@ -89,9 +89,6 @@ public class StringOps {
                 allTheIndex[index++] = j;
             }
         }
-        for(int k = 0; k < allTheIndex.length; k++){
-            System.out.println(allTheIndex[k]);
-        }
         return allTheIndex;
     }
 
