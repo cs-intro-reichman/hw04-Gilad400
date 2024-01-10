@@ -26,17 +26,107 @@ public class StringOps {
     }
 
     public static String capVowelsLowRest (String string) {
-        // Write your code here:
-        return "";
+        String res = "";
+        char[] vowels = {'a','e','i','o','u'};
+        boolean isVowel = false;
+        
+        for(int i = 0; i < string.length(); i++){
+            for(int j = 0; j < vowels.length; j++){
+                if (string.charAt(i) == vowels[j]) {
+                    res += (char)(string.charAt(i) - 32);
+                    isVowel = true;
+                }
+            }
+            if((string.charAt(i) >= 65) && (string.charAt(i) <= 90) && !isVowel){
+                res += (char)(string.charAt(i) + 32);
+            }else if ((string.charAt(i) >= 97) && (string.charAt(i) <= 122) && !isVowel) {
+                res += string.charAt(i);
+            }else if (!isVowel) {
+                res += " ";
+            }
+            isVowel = false;
+        }
+        return res;
     }
 
     public static String camelCase (String string) {
-        // Write your code here:
-        return "";
+        String res = "";
+        int index = 0;
+        //Check where is the first word start
+        while (index < string.length()) {
+            if (string.charAt(index) != 32) {
+                break;
+            }
+            index++;
+        }
+        //Modify the first word
+        res += lowercaseFirstWord(string, index);
+        //Update the index
+        index += res.length();
+        //Modify the rest of the words in the sentence
+        while (index < string.length()) {
+            if (string.charAt(index) != 32) {
+                String temp = middleWord(string, index);
+                res += temp;
+                index += temp.length();
+            } 
+            index++;
+        }
+        return res;
     }
 
     public static int[] allIndexOf (String string, char chr) {
-        // Write your code here:
-        return new int[1];
+        int count = 0;
+        for(int i = 0; i < string.length(); i++){
+            if (string.charAt(i) == chr) {
+                count++;
+            }
+        }
+        int[] allTheIndex = new int[count];
+        int index = 0;
+        for(int j = 0; j < string.length(); j++){
+            if (string.charAt(j) == chr) {
+                allTheIndex[index++] = j;
+            }
+        }
+        for(int k = 0; k < allTheIndex.length; k++){
+            System.out.println(allTheIndex[k]);
+        }
+        return allTheIndex;
     }
+
+    private static String lowercaseFirstWord (String string, int index){
+        String firstWord = "";
+        while(index < string.length() && (string.charAt(index) != 32)){
+            if ((string.charAt(index) >= 65) && (string.charAt(index) <= 90)) {
+                firstWord += (char)(string.charAt(index) + 32);
+            } else {
+                firstWord += (char)string.charAt(index);
+            }
+            index++;    
+        }
+        return firstWord;
+    }
+
+    private static String middleWord (String string, int index){
+        String middleWord = "";
+        //Firs letter
+        if ((string.charAt(index) >= 97) && (string.charAt(index) <= 122)) {
+            middleWord += (char)(string.charAt(index) - 32);
+        }else {
+            middleWord += (char)string.charAt(index);
+        }
+        index++;
+        //All the rest
+        while(index < string.length() && (string.charAt(index) != 32)){
+            if ((string.charAt(index) >= 65) && (string.charAt(index) <= 90)) {
+                middleWord += (char)(string.charAt(index) + 32);
+            } else {
+                middleWord += (char)string.charAt(index);
+            }
+            index++;    
+        }
+        return middleWord;
+    }
+    
 }
