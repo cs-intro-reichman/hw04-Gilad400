@@ -33,7 +33,11 @@ public class StringOps {
         for(int i = 0; i < string.length(); i++){
             for(int j = 0; j < vowels.length; j++){
                 if (string.charAt(i) == vowels[j]) {
-                    res += (char)(string.charAt(i) - 32);
+                    if ((string.charAt(i) >= 97) && (string.charAt(i) <= 122)) {
+                        res += (char)(string.charAt(i) - 32);
+                    }else{
+                        res += (char)string.charAt(i);
+                    }
                     isVowel = true;
                 }
             }
