@@ -27,7 +27,7 @@ public class StringOps {
 
     public static String capVowelsLowRest (String string) {
         String res = "";
-        char[] vowels = {'a','e','i','o','u'};
+        char[] vowels = {'a','e','i','o','u','A','E','I','O','U'};
         boolean isVowel = false;
         
         for(int i = 0; i < string.length(); i++){
